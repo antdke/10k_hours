@@ -49,7 +49,7 @@ class PostsController < ApplicationController
     redirect_to root_path, error: 'Post not found' if @post.nil?
   end
 
-  # filters for non-recurring (or "regular") published posts and orders from newest to oldest
+  # filters for non-recurring (or "regular") published posts and orders them from newest to oldest
   def get_regular_posts
     @regular_published_posts = Post.published.non_recurring.newest_to_oldest
   end

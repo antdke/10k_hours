@@ -12,12 +12,7 @@
 
 <%= render @post %>
 
-<%== pagy_nav(@pagy) %>
-<%= link_to "Next", "/posts/#{@next_post.last.slug}" if @next_post.size > 0 %>
-<%= link_to "Prev", "/posts/#{@prev_post.first.slug}" if @prev_post.size > 0 %>
-
-
 <div class="text-center mt-8">
-    <a href=""> ‹ Prev </a> | 
-    <a href=""> Next › </a>
+    <a href="<%= "/posts/#{@prev_post.first.slug}" if @prev_post.size > 0 %>"> ‹ Prev </a> | 
+    <a href="<%= "/posts/#{@next_post.last.slug}" if @next_post.size > 0 %>"> Next › </a>
 </div>

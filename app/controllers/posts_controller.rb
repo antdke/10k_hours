@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:edit, :update, :show, :destroy]
   before_action :filter_posts, only: [:index]
+  before_action :get_regular_posts, only: [:show]
 
   def index
     @featured_posts = Post.featured
@@ -29,6 +30,9 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = @regular_published_posts.find_by(slug: params[:id])
+    @pagy, @next_post = pagy(@regular_published_posts.where("id > ?", @post.id))
+    @pagy, @prev_post = pagy(@regular_published_posts.where("id < ?", @post.id))
   end
 
   def destroy
@@ -43,6 +47,11 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id]) if @post.nil?
 
     redirect_to root_path, error: 'Post not found' if @post.nil?
+  end
+
+  # filters for non-recurring (or "regular") published posts and orders from newest to oldest
+  def get_regular_posts
+    @regular_published_posts = Post.published.non_recurring.newest_to_oldest
   end
 
   # improves UI when many recurring tasks exist sequentially without a regular update

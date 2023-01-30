@@ -12,7 +12,17 @@
 
 <%= render @post %>
 
-<div class="text-center mt-8">
-    <a href="<%= "/posts/#{@prev_post.first.slug}" if @prev_post.size > 0 %>"> ‹ Prev </a> | 
-    <a href="<%= "/posts/#{@next_post.last.slug}" if @next_post.size > 0 %>"> Next › </a>
+<div class="text-center my-8">
+    <a href="<%= "/posts/#{@prev_post.first.slug}" if @prev_post.size > 0 %>"
+       class="<%= "text-gray-300 cursor-default pointer-events-none" if @prev_post.size < 1 %>"
+    > 
+      ‹ Prev 
+    </a> 
+    | 
+    <a 
+        href="<%= "/posts/#{@next_post.last.slug}" if @next_post.size > 0 %>"
+        class="<%= "text-gray-300 cursor-default pointer-events-none" if @next_post.size < 1 %>"
+      > 
+      Next › 
+    </a>
 </div>

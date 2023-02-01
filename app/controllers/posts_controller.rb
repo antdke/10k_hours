@@ -50,8 +50,8 @@ class PostsController < ApplicationController
   # creates a collection of these posts for pagy to paginate through
   def set_pagination_posts
     @pagination_posts = Post.published.non_recurring.newest_to_oldest
-    @pagy, @older_posts = pagy(@pagination_posts.where("id > ?", @post.id))
-    @pagy, @newer_posts = pagy(@pagination_posts.where("id < ?", @post.id))
+    @pagy, @newer_posts = pagy(@pagination_posts.where("id > ?", @post.id))
+    @pagy, @older_posts = pagy(@pagination_posts.where("id < ?", @post.id))
   end
 
   # improves UI when many recurring tasks exist sequentially without a regular update

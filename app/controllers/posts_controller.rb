@@ -30,8 +30,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @pagy, @older_post = pagy(@regular_published_posts.where("id > ?", @post.id))
-    @pagy, @newer_post = pagy(@regular_published_posts.where("id < ?", @post.id))
   end
 
   def destroy
@@ -51,6 +49,8 @@ class PostsController < ApplicationController
   # filters for non-recurring (or "regular") published posts and orders them from newest to oldest
   def get_regular_posts
     @regular_published_posts = Post.published.non_recurring.newest_to_oldest
+    @pagy, @older_post = pagy(@regular_published_posts.where("id > ?", @post.id))
+    @pagy, @newer_post = pagy(@regular_published_posts.where("id < ?", @post.id))
   end
 
   # improves UI when many recurring tasks exist sequentially without a regular update

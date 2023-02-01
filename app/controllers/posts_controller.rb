@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:edit, :update, :show, :destroy]
   before_action :filter_posts, only: [:index]
-  before_action :get_regular_posts, only: [:show]
+  before_action :set_pagination_posts, only: [:show]
 
   def index
     @featured_posts = Post.featured
@@ -47,10 +47,11 @@ class PostsController < ApplicationController
   end
 
   # filters for non-recurring (or "regular") published posts and orders them from newest to oldest
-  def get_regular_posts
-    @regular_published_posts = Post.published.non_recurring.newest_to_oldest
-    @pagy, @older_post = pagy(@regular_published_posts.where("id > ?", @post.id))
-    @pagy, @newer_post = pagy(@regular_published_posts.where("id < ?", @post.id))
+  # creates a collection of these posts for pagy to paginate through
+  def set_pagination_posts
+    @pagination_posts = Post.published.non_recurring.newest_to_oldest
+    @pagy, @older_post = pagy(@pagination_posts.where("id > ?", @post.id))
+    @pagy, @newer_post = pagy(@pagination_posts.where("id < ?", @post.id))
   end
 
   # improves UI when many recurring tasks exist sequentially without a regular update

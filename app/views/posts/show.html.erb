@@ -16,21 +16,8 @@
     <% newer_post_link = "/posts/#{@newer_post.first.slug}" if @newer_post.size > 0 %>
     <% newer_post_link_classes = "text-gray-300 cursor-default pointer-events-none" if @newer_post.size < 1 %>
     <%= link_to '‹ Newer', newer_post_link, class: newer_post_link_classes %>
-
-    <!-- <a href="<%= "/posts/#{@newer_post.first.slug}" if @newer_post.size > 0 %>"
-       class="<%= "text-gray-300 cursor-default pointer-events-none" if @newer_post.size < 1 %>"
-    > 
-      ‹ Newer 
-    </a>  -->
     |
     <% older_post_link = "/posts/#{@older_post.last.slug}" if @older_post.size > 0 %>
     <% older_post_link_classes = "text-gray-300 cursor-default pointer-events-none" if @older_post.size < 1 %>
     <%= link_to 'Older ›', older_post_link, class: older_post_link_classes %>
-
-    <!-- <a 
-        href="<%= "/posts/#{@older_post.last.slug}" if @older_post.size > 0 %>"
-        class="<%= "text-gray-300 cursor-default pointer-events-none" if @older_post.size < 1 %>"
-      > 
-      Older › 
-    </a> -->
 </div>

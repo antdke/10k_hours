@@ -30,8 +30,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @pagy, @next_post = pagy(@regular_published_posts.where("id > ?", @post.id))
-    @pagy, @prev_post = pagy(@regular_published_posts.where("id < ?", @post.id))
+    @pagy, @older_post = pagy(@regular_published_posts.where("id > ?", @post.id))
+    @pagy, @newer_post = pagy(@regular_published_posts.where("id < ?", @post.id))
   end
 
   def destroy

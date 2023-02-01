@@ -13,15 +13,15 @@
 <%= render @post %>
 
 <div class="text-center my-8">
-    <a href="<%= "/posts/#{@prev_post.first.slug}" if @prev_post.size > 0 %>"
-       class="<%= "text-gray-300 cursor-default pointer-events-none" if @prev_post.size < 1 %>"
+    <a href="<%= "/posts/#{@newer_post.first.slug}" if @newer_post.size > 0 %>"
+       class="<%= "text-gray-300 cursor-default pointer-events-none" if @newer_post.size < 1 %>"
     > 
       ‹ Newer 
     </a> 
     | 
     <a 
-        href="<%= "/posts/#{@next_post.last.slug}" if @next_post.size > 0 %>"
-        class="<%= "text-gray-300 cursor-default pointer-events-none" if @next_post.size < 1 %>"
+        href="<%= "/posts/#{@older_post.last.slug}" if @older_post.size > 0 %>"
+        class="<%= "text-gray-300 cursor-default pointer-events-none" if @older_post.size < 1 %>"
       > 
       Older › 
     </a>

@@ -30,7 +30,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = @regular_published_posts.find_by(slug: params[:id])
     @pagy, @next_post = pagy(@regular_published_posts.where("id > ?", @post.id))
     @pagy, @prev_post = pagy(@regular_published_posts.where("id < ?", @post.id))
   end

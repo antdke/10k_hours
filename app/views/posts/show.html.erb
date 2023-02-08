@@ -12,12 +12,14 @@
 
 <%= render @post %>
 
+
+
 <div class="text-center my-8">
-    <% older_posts_link = "/posts/#{@older_posts.first.slug}" if @older_posts.size > 0 %>
-    <% older_posts_link_classes = "text-gray-300 cursor-default pointer-events-none" if @older_posts.size < 1 %>
-    <%= link_to '‹ Older', older_posts_link, class: older_posts_link_classes %>
+    <% older_post_link = @older_post != nil ? "/posts/#{@older_post.slug}" : "#" %>
+    <% older_post_classes = "text-gray-300 cursor-default pointer-events-none" if @older_post == nil %>
+    <%= link_to '‹ Older', older_post_link, class: older_post_classes %>
     |
-    <% newer_posts_link = "/posts/#{@newer_posts.last.slug}" if @newer_posts.size > 0 %>
-    <% newer_posts_link_classes = "text-gray-300 cursor-default pointer-events-none" if @newer_posts.size < 1 %>
-    <%= link_to 'Newer ›', newer_posts_link, class: newer_posts_link_classes %>
+    <% newer_post_link = @newer_post != nil ? "/posts/#{@newer_post.slug}" : "#" %>
+    <% newer_post_classes = "text-gray-300 cursor-default pointer-events-none" if @newer_post == nil %>
+    <%= link_to 'Newer ›', newer_post_link, class: newer_post_classes %>
 </div>

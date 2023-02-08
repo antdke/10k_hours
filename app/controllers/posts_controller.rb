@@ -49,8 +49,8 @@ class PostsController < ApplicationController
   # filters for non-recurring (or "regular") published posts and orders them from newest to oldest
   # then for any given post in the filtered collection post, grab the older post and newer post
   def set_pagination_posts
-    @older_post = Post.published.non_recurring.newest_to_oldest.where("published_at < ?", @post.published_at).first
-    @newer_post = Post.published.non_recurring.newest_to_oldest.where("published_at > ?", @post.published_at).last
+    @older_post = Post.posts_before(@post).first
+    @newer_post = Post.posts_after(@post).last
   end
 
   # improves UI when many recurring tasks exist sequentially without a regular update

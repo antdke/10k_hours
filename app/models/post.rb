@@ -18,6 +18,8 @@ class Post < ApplicationRecord
   scope :draft, -> { where(visibility: 'draft') }
   scope :newest_to_oldest, -> { order(published_at: :desc) }
   scope :featured, -> { published.non_recurring.where(featured: true).newest_to_oldest.limit(10) }
+  scope :posts_before, ->(post) { published.non_recurring.newest_to_oldest.where("published_at < ?", post.published_at) }
+  scope :posts_after, ->(post) { published.non_recurring.newest_to_oldest.where("published_at > ?", post.published_at) }
 
   def truncated_preview
     meta_description || content.to_plain_text.truncate(280)
